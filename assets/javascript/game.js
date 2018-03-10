@@ -66,7 +66,9 @@ $(document).ready(function(){
 // ONCLICK OF START BUTTON FUNCTION
   $("#start").on("click", function() {
     // Disables Start button on click
-    $(this).prop("disabled", true);
+    $(this).css("display", "none");
+    $("#instructions").text("Click a character to select them as your champion.  Then click Fight to proceed with picking your opponent.");
+
 
     // Animation of characters dropping into focus
     for (var i = 0; i < characters.length; i++) {
@@ -79,7 +81,7 @@ $(document).ready(function(){
     publishStatsToDivs();
   });
 
-// ONCLICK JUMP FUNCTION
+// ONCLICK OF CHARACTER FUNCTION
   $(".character").on("click", function() {
     if (gameplayStarted === false) {
       $(this).animate({
