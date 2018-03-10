@@ -1,4 +1,6 @@
-var characters = ["alpha", "beta", "gamma", "delta"];
+var characters = ["Bender B. Rondriguez", "Rosie", "Robot", "R2"];
+var opponents = [];
+var player;
 var hPercent = 12.5;
 var character0;
 var character1;
@@ -22,16 +24,6 @@ function Sprite(name, healthPoints, attackPower, counterAttackPower, selected) {
   };
 }
 
-// Character Object Instance Creation
-// for (var i = 0; i < characters.length; i++) {
-//   var spriteID = "character" + i;
-//   var nameFromArray = characters[i];
-//   var healthPointsRandom = getRandomIntInclusive(5, 25);
-//   var attackPowerRandom = getRandomIntInclusive(1, 10);
-//   var counterAttackPowerRandom = getRandomIntInclusive(1, 8);
-//   spriteID = new Sprite(nameFromArray, healthPointsRandom, attackPowerRandom, counterAttackPowerRandom, false);
-//   spriteID.logStats();
-
 // CHARACTER CREATION
 character0 = new Sprite(characters[0], getRandomIntInclusive(5, 25), getRandomIntInclusive(1, 10), getRandomIntInclusive(1, 8), false);
 character0.logStats();
@@ -45,19 +37,17 @@ character3.logStats();
 
 
 function publishStatsToDivs() {
-  $("#characterZeroStats").attr({"name": character0.name, "healthPoints": character0.healthPoints, "attackPower": character0.attackPower, "counterAttackPower": character0.counterAttackPower});
-  $("#characterZeroStats").html(`<p>Name: ${character0.name} <br>Health Points: ${character0.healthPoints} <br>Attack: ${character0.attackPower} <br>Counter Attack: ${character0.counterAttackPower}`);
+  $("#characterZeroStats").attr({"name": character0.name, "healthPoints": character0.healthPoints, "attackPower": character0.attackPower, "counterAttackPower": character0.counterAttackPower})
+  .html(`<p>Name: ${character0.name} <br>Health Points: ${character0.healthPoints} <br>Attack: ${character0.attackPower} <br>Counter Attack: ${character0.counterAttackPower}</p>`);
 
-  $("#characterOneStats").attr({"name": character1.name, "healthPoints": character1.healthPoints, "attackPower": character1.attackPower, "counterAttackPower": character1.counterAttackPower});
-  $("#characterOneStats").html(`<p>Name: ${character1.name} <br>Health Points: ${character1.healthPoints} <br>Attack: ${character1.attackPower} <br>Counter Attack: ${character1.counterAttackPower}`);
+  $("#characterOneStats").attr({"name": character1.name, "healthPoints": character1.healthPoints, "attackPower": character1.attackPower, "counterAttackPower": character1.counterAttackPower})
+  .html(`<p>Name: ${character1.name} <br>Health Points: ${character1.healthPoints} <br>Attack: ${character1.attackPower} <br>Counter Attack: ${character1.counterAttackPower}</p>`);
 
+  $("#characterTwoStats").attr({"name": character2.name, "healthPoints": character2.healthPoints, "attackPower": character2.attackPower, "counterAttackPower": character2.counterAttackPower})
+  .html(`<p>Name: ${character2.name} <br>Health Points: ${character2.healthPoints} <br>Attack: ${character2.attackPower} <br>Counter Attack: ${character2.counterAttackPower}</p>`);
 
-  $("#characterTwoStats").attr({"name": character2.name, "healthPoints": character2.healthPoints, "attackPower": character2.attackPower, "counterAttackPower": character2.counterAttackPower});
-  $("#characterTwoStats").html(`<p>Name: ${character2.name} <br>Health Points: ${character2.healthPoints} <br>Attack: ${character2.attackPower} <br>Counter Attack: ${character2.counterAttackPower}`);
-
-
-  $("#characterThreeStats").attr({"name": character3.name, "healthPoints": character3.healthPoints, "attackPower": character3.attackPower, "counterAttackPower": character3.counterAttackPower});
-  $("#characterThreeStats").html(`<p>Name: ${character3.name} <br>Health Points: ${character3.healthPoints} <br>Attack: ${character3.attackPower} <br>Counter Attack: ${character3.counterAttackPower}`);
+  $("#characterThreeStats").attr({"name": character3.name, "healthPoints": character3.healthPoints, "attackPower": character3.attackPower, "counterAttackPower": character3.counterAttackPower})
+  .html(`<p>Name: ${character3.name} <br>Health Points: ${character3.healthPoints} <br>Attack: ${character3.attackPower} <br>Counter Attack: ${character3.counterAttackPower}</p>`);
 
 }
 
@@ -80,7 +70,7 @@ $(document).ready(function(){
     // Animation of characters dropping into focus
     for (var i = 0; i < characters.length; i++) {
       $("#sprite" + i).animate({
-        top: '100px',
+        top: '250px',
         left: hPercent +'%'
       }, 1400, "easeOutBounce");
       hPercent += 20;
@@ -102,12 +92,21 @@ $(document).ready(function(){
     var clickedId = $(this).attr("id");
     switch (clickedId) {
       case "sprite0":
-        $("#characterZeroStats").attr("selected", true);
-        // $("#characterOneStats").attr("selected", "false");
-        // $("#characterTwoStats").attr("selected", "false");
-        // $("#characterThreeStats").attr("selected", "false");
+        player = "Bender B. Rondriguez";
+        opponents = ["Rosie", "Robot", "R2"];
         break;
-
+      case "sprite1":
+        player = "Rosie";
+        opponents = ["Bender B. Rondriguez", "Robot", "R2"];
+        break;
+      case "sprite2":
+        player = "Robot";
+        opponents = ["Bender B. Rondriguez", "Rosie", "R2"];
+        break;
+      case "sprite3":
+        player = "R2";
+        opponents = ["Bender B. Rondriguez", "Rosie", "Robot"];
+        break;
     }
 
   });
