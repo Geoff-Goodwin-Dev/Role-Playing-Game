@@ -1,19 +1,19 @@
 #gameContainer {
   position: relative;
   height: 400px;
+  width: 700px;
   background-image: url("../images/arena.jpg");
   background-size: cover;
 }
 
 .character {
   text-align: center;
-  /*background-color: green;*/
   height: 150px;
   width: 15%;
   position: absolute;
   top: -500px;
   left: 50%;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .spriteImage {

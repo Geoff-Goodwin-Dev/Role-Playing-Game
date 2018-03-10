@@ -6,6 +6,7 @@ var character0;
 var character1;
 var character2;
 var character3;
+var gameplayStarted = false;
 
 // Character Object Constructor Function
 function Sprite(name, healthPoints, attackPower, counterAttackPower, selected) {
@@ -65,7 +66,7 @@ $(document).ready(function(){
 // ONCLICK OF START BUTTON FUNCTION
   $("#start").on("click", function() {
     // Disables Start button on click
-    $(this).prop("disabled",true);
+    $(this).prop("disabled", true);
 
     // Animation of characters dropping into focus
     for (var i = 0; i < characters.length; i++) {
@@ -80,38 +81,108 @@ $(document).ready(function(){
 
 // ONCLICK JUMP FUNCTION
   $(".character").on("click", function() {
-    $(this).animate({
-      top: '-=100px',
-      width: '+=10px',
-      left: '-=5px'
-    }, 75, "easeOutCubic").animate({
-      top: '+=100px',
-      width: '-=10px',
-      left: '+=5px'
-    }, 300, "easeOutBounce");
-    var clickedId = $(this).attr("id");
-    switch (clickedId) {
-      case "sprite0":
-        player = "Bender B. Rondriguez";
-        opponents = ["Rosie", "Robot", "R2"];
-        break;
-      case "sprite1":
-        player = "Rosie";
-        opponents = ["Bender B. Rondriguez", "Robot", "R2"];
-        break;
-      case "sprite2":
-        player = "Robot";
-        opponents = ["Bender B. Rondriguez", "Rosie", "R2"];
-        break;
-      case "sprite3":
-        player = "R2";
-        opponents = ["Bender B. Rondriguez", "Rosie", "Robot"];
-        break;
+    if (gameplayStarted === false) {
+      $(this).animate({
+        top: '-=100px',
+        width: '+=10px',
+        left: '-=5px'
+      }, 75, "easeOutCubic").animate({
+        top: '+=100px',
+        width: '-=10px',
+        left: '+=5px'
+      }, 300, "easeOutBounce");
+      var clickedId = $(this).attr("id");
+      switch (clickedId) {
+        case "sprite0":
+          player = "Bender B. Rondriguez";
+          opponents = ["Rosie", "Robot", "R2"];
+          $("#sprite0").animate({
+            top: '125px',
+            left: '5px'
+          }, 150, "easeOutCubic");
+          $("#sprite1").animate({
+            top: '0px',
+            left: '550px'
+          }, 150, "easeOutCubic");
+          $("#sprite2").animate({
+            top: '125px',
+            left: '400px'
+          }, 150, "easeOutCubic");
+          $("#sprite3").animate({
+            top: '250px',
+            left: '550px'
+          }, 150, "easeOutCubic");
+          break;
+        case "sprite1":
+          player = "Rosie";
+          opponents = ["Bender B. Rondriguez", "Robot", "R2"];
+          $("#sprite1").animate({
+            top: '125px',
+            left: '5px'
+          }, 150, "easeOutCubic");
+          $("#sprite0").animate({
+            top: '0px',
+            left: '550px'
+          }, 150, "easeOutCubic");
+          $("#sprite2").animate({
+            top: '125px',
+            left: '400px'
+          }, 150, "easeOutCubic");
+          $("#sprite3").animate({
+            top: '250px',
+            left: '550px'
+          }, 150, "easeOutCubic");
+          break;
+        case "sprite2":
+          player = "Robot";
+          opponents = ["Bender B. Rondriguez", "Rosie", "R2"];
+          $("#sprite2").animate({
+            top: '125px',
+            left: '5px'
+          }, 150, "easeOutCubic");
+          $("#sprite0").animate({
+            top: '0px',
+            left: '550px'
+          }, 150, "easeOutCubic");
+          $("#sprite1").animate({
+            top: '125px',
+            left: '400px'
+          }, 150, "easeOutCubic");
+          $("#sprite3").animate({
+            top: '250px',
+            left: '550px'
+          }, 150, "easeOutCubic");
+          break;
+        case "sprite3":
+          player = "R2";
+          opponents = ["Bender B. Rondriguez", "Rosie", "Robot"];
+          $("#sprite3").animate({
+            top: '125px',
+            left: '5px'
+          }, 150, "easeOutCubic");
+          $("#sprite0").animate({
+            top: '0px',
+            left: '550px'
+          }, 150, "easeOutCubic");
+          $("#sprite1").animate({
+            top: '125px',
+            left: '400px'
+          }, 150, "easeOutCubic");
+          $("#sprite2").animate({
+            top: '250px',
+            left: '550px'
+          }, 150, "easeOutCubic");
+          break;
+      }
+      $("#player").text(player);
+      $("#opponents").text(opponents.join(', '));
+      $("#fight").prop("disabled", false);
     }
-
   });
 
-
+  $("#fight").on("click", function() {
+    gameplayStarted = true;
+  });
 });
 
 
